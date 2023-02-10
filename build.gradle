@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.2'
-    id 'io.spring.dependency-management' version '1.1.0'
+//    id 'org.springframework.boot' version '3.0.2'
+//    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group = 'com.kodilla'
@@ -13,10 +13,18 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    implementation 'org.springframework.boot:spring-boot-starter'
+//    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.9.2'
+//    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.9.2'
+
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
 }
+
+//tasks.named('test') {
+//    useJUnitPlatform()
+//}
