@@ -7,7 +7,7 @@ public class Shipment {
     private final Customer customer;
     private final ShipmentStatus shipmentStatus;
 
-    public Shipment(Customer customer, String shipmentID, LocalDate completionDate, LocalDate pickupDate, ShipmentStatus shipmentStatus1) {
+    public Shipment(Customer customer, String shipmentID, LocalDate completionDate, ShipmentStatus shipmentStatus1) {
         this.customer = customer;
         this.shipmentStatus = shipmentStatus1;
     }

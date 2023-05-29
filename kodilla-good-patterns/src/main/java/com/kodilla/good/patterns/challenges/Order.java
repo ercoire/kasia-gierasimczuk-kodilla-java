@@ -7,7 +7,7 @@ public class Order {
     private final String orderID;
 
 
-    public Order(String orderID, LocalDate createdOn, String customerID, Material material, int pieces) {
+    public Order(String orderID, LocalDate createdOn, String customerID, Material material, int quantity) {
         this.orderID = orderID;
     }
 

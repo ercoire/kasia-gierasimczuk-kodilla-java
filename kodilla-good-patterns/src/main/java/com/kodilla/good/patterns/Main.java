@@ -14,7 +14,7 @@ public class Main {
         Shipment shipment = new Shipment(customer,
                 "SH001",
                 LocalDate.of(2023, 5, 28),
-                LocalDate.of(2023, 5, 26), ShipmentStatus.PACKING );
+                ShipmentStatus.PACKING );
         OrderProcessor orderProcessor = new OrderProcessor();
 
 
