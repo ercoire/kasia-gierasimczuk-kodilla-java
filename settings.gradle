@@ -3,4 +3,6 @@ include 'kodilla_testing'
 include 'kodilla_stream'
 include 'kodilla-exception'
 include 'kodilla-good-patterns'
+include 'kodilla-spring-intro'
+include 'kodilla-spring'
 
