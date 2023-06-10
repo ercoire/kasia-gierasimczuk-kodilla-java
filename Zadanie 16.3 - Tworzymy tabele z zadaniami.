@@ -1,0 +1,75 @@
+CREATE TABLE ISSUESLISTS
+(
+    ID SERIAL PRIMARY KEY,
+    NAME VARCHAR(100)
+);
+
+
+CREATE TABLE ISSUES
+(
+    ID SERIAL PRIMARY KEY,
+    ISSUESLIST_ID BIGINT unsigned not null,
+    USER_ID_ASSIGNEDTO bigint unsigned not null,
+    SUMMARY VARCHAR(1024),
+    DESCRIPTION VARCHAR(1024),
+    FOREIGN KEY (ISSUESLIST_ID) REFERENCES ISSUESLISTS(ID),
+    FOREIGN KEY (USER_ID_ASSIGNEDTO) REFERENCES USERS(ID)
+);
+
+INSERT INTO ISSUESLISTS (NAME)
+VALUES ('ToDo');
+
+INSERT INTO ISSUESLISTS (NAME)
+VALUES ('Progress');
+
+INSERT INTO ISSUESLISTS (NAME)
+VALUES ('Done');
+
+commit;
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (1, 1, 'Research for a new feature', 'Conduct research on the latest trends and gather relevant information.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (1, 2, 'Schedule team meeting', 'Coordinate availabilities and send out invites.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (1, 1, 'Draft proposal document', 'Prepare a document outlining the project scope, objectives and deliverables.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (1, 3, 'Review client feedback', 'Identify key points for improvement put them into the project plan.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (1, 4, 'Prepare roadmap', 'Put together a presentation with milestones and key deliverables.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (2, 2, 'Design wireframes', 'Collaborate with the design team to create visual prototypes.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (2, 1, 'Arrange user testing', 'Arrange sessions with required teams, prepare scenarios and log results.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (2, 3, 'Review and edit documentation', 'Proofread submit technical documentation in the cloud.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (2, 1, 'Ensure performance', 'Check to identify if performance requirements are met.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (2, 2, 'Perform security audit','Conduct a security audit of the system to identify vulnerabilities and implement measures to prevent unauthorized access.')
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (3, 1, 'Finalize project budget', 'Review and allign spending. Consult accounting team if necessary.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (3, 2, 'Present proposal', 'Arrange a meeting with client to present and explain scope, objectives and timeline.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (3, 1, 'Launch website', 'Deploy the website on the production server and perform final checks.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (3, 3, 'Conduct post-launch analysis', 'Analyze performance and user behavior, identify optimization opportunities.');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, USER_ID_ASSIGNEDTO, SUMMARY, DESCRIPTION)
+VALUES (3, 2, 'Prepare closure report', 'Summarize achievements, challenges, lessons learnt, and recommendations.');
+
+Commit;
