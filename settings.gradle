@@ -8,4 +8,4 @@ include 'kodilla-spring'
 include 'kodilla-spring-web'
 include 'kodilla-patterns'
 include 'kodilla-jdbc'
-
+include 'kodilla-hibernate'
