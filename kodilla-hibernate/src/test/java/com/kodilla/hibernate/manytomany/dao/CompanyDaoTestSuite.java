@@ -6,13 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @SpringBootTest
 class CompanyDaoTestSuite {
 
     @Autowired
     private CompanyDao companyDao;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Test
     void testSaveManyToMany() {
@@ -55,6 +61,67 @@ class CompanyDaoTestSuite {
             companyDao.deleteById(softwareMachineId);
             companyDao.deleteById(dataMaestersId);
             companyDao.deleteById(greyMatterId);
+        } catch (Exception e) {
+            //do nothing
+        }
+    }
+
+    @Test
+    void testNamedQueries() {
+        //Given
+        Company securitySecretService = new Company("Security Secret Service");
+        Company jonesUnlimited = new Company("Jones Unlimited");
+        Company secureOperations = new Company("Secure Operations");
+
+        //When
+        companyDao.save(securitySecretService);
+        companyDao.save(jonesUnlimited);
+        companyDao.save(secureOperations);
+
+        List<Company> companiesWithSelectedText = companyDao.retrieveCompaniesWithSelectedText("sec");
+
+        //Then
+        assertEquals(2, companiesWithSelectedText.size());
+
+        //CleanUp
+        try {
+            companyDao.deleteById(securitySecretService.getId());
+            companyDao.deleteById(jonesUnlimited.getId());
+            companyDao.deleteById(secureOperations.getId());
+        } catch (Exception e) {
+            //do nothing
+        }
+    }
+
+    @Test
+    void testNativeQueries() {
+
+        //Given
+        Employee adamSmith = new Employee("Adam", "Smith");
+        Employee amberWagner = new Employee("Amber", "Wagner");
+        Employee hannahFrost = new Employee("Hannah", "Frost");
+        Employee aliceFrost = new Employee("Alice", "Frost");
+        Employee peterFrost = new Employee("Peter", "Frost");
+
+        //When
+        employeeDao.save(adamSmith);
+        employeeDao.save(amberWagner);
+        employeeDao.save(hannahFrost);
+        employeeDao.save(aliceFrost);
+        employeeDao.save(peterFrost);
+
+        List<Employee> retrieveRequestedNames = employeeDao.retrieveRequestedNames("Frost");
+
+        //Then
+        assertEquals(3, retrieveRequestedNames.size());
+
+        //CleanUp
+        try {
+            employeeDao.deleteById(adamSmith.getId());
+            employeeDao.deleteById(amberWagner.getId());
+            employeeDao.deleteById(hannahFrost.getId());
+            employeeDao.deleteById(aliceFrost.getId());
+            employeeDao.deleteById(peterFrost.getId());
         } catch (Exception e) {
             //do nothing
         }
