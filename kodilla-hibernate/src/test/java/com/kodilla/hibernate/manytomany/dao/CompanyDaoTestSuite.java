@@ -110,7 +110,7 @@ class CompanyDaoTestSuite {
         employeeDao.save(aliceFrost);
         employeeDao.save(peterFrost);
 
-        List<Employee> retrieveRequestedNames = employeeDao.retrieveRequestedNames("Frost");
+        List<Employee> retrieveRequestedNames = employeeDao.retrieveByText("Frost");
 
         //Then
         assertEquals(3, retrieveRequestedNames.size());

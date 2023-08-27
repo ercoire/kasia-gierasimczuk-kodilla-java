@@ -8,9 +8,15 @@ import java.util.List;
 
 
 @NamedNativeQuery(
-        name = "Company.retrieveCompaniesWithSelectedText",
+        name = "Company.retrieveCompaniesWithSelectedPrefix",
         query = "SELECT * FROM COMPANIES" +
                 " WHERE LEFT(company_name, 3) = :name",
+        resultClass = Company.class
+)
+@NamedNativeQuery(
+        name = "Company.retrieveCompaniesWithSelectedText",
+        query = "SELECT * FROM companies" +
+                " WHERE company_name LIKE CONCAT('%', :text, '%')",
         resultClass = Company.class
 )
 @Entity
