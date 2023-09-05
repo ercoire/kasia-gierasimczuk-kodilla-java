@@ -5,31 +5,58 @@ import java.util.List;
 
 public class FlightFinder {
 
-    public List<Airport> departures = new ArrayList<>();
-    public List<Airport> arrivals = new ArrayList<>();
+    private final List<Flight> flights = new ArrayList<>();
 
-    Airport gdansk = new Airport("Gdansk", "GDN");
-
-
-    public boolean searchFlightsFrom(Airport airport) {
-        //if arrivals().contains(airport)
-        System.out.println("There are available flight from " + airport);
-        return false;
+    public List<Flight> getFlights() {
+        return flights;
     }
 
-    public boolean searchFlightsTo (Airport airport) {
-        //if arrivals().contains(airport)
-        System.out.println("There are available flight to " + airport);
-        return false;
-    }
+    public void searchFlightsFrom(Airport airport) {
+        List<Flight> flightsFromAirport = flights.stream()
+                .filter(flight -> flight.getDepartureAirport().equals(airport))
+                .toList();
 
-    public boolean searchFlightsWithTransfer(Airport airportA, Airport airportB, Airport airportC){
-        if (true /*departures contain A && arrivals contain B*/) {
-            if (true /*arrivals contain C && departures contain C*/) {
-                System.out.println("We operate between " + airportA + " and " + airportB + " via " + airportC);
-                return true;
-            }
+        if (flightsFromAirport.isEmpty()) {
+            System.out.println("No flights found from " + airport.getAirportName() + "\n");
+        } else {
+            System.out.println("Flights from " + airport.getAirportName() + ":");
+            flightsFromAirport.forEach(flight -> System.out.println(flight.toString()));
+            System.out.println();
         }
-        return false;
+
+    }
+
+    public void searchFlightsTo(Airport airport) {
+        List<Flight> flightsToAirport = flights.stream()
+                .filter(flight -> flight.getArrivalAirport().equals(airport))
+                .toList();
+
+        if (flightsToAirport.isEmpty()) {
+            System.out.println("No flights found to " + airport.getAirportName() + "\n");
+        } else {
+            System.out.println("Flights to " + airport.getAirportName() + ":");
+            flightsToAirport.forEach(flight -> System.out.println(flight.toString()));
+            System.out.println();
+        }
+    }
+
+    public void searchFlightsWithTransfer(Airport departureAirport, Airport arrivalAirport) {
+
+        List<Flight> flightsWithOneTransfer = flights.stream()
+                .filter(flight -> flight.getDepartureAirport().equals(departureAirport))
+                .filter(flight -> flights.stream()
+                        .anyMatch(f -> f.getDepartureAirport().equals(flight.getArrivalAirport()) &&
+                                f.getArrivalAirport().equals(arrivalAirport)))
+                .toList();
+
+        if (flightsWithOneTransfer.isEmpty()) {
+            System.out.println("No flights with one transfer from " + departureAirport.getAirportName() + " to "
+                    + arrivalAirport.getAirportName() + ".");
+        } else {
+            System.out.println("Flights with one transfer from " + departureAirport.getAirportName() + " to "
+                    + arrivalAirport.getAirportName() + ": ");
+            flightsWithOneTransfer.forEach(flight -> System.out.println(flight.toString()));
+        }
+
     }
 }

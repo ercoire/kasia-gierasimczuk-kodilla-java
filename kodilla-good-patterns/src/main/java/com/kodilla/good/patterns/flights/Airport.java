@@ -1,7 +1,5 @@
 package com.kodilla.good.patterns.flights;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Airport {
@@ -9,9 +7,18 @@ public class Airport {
     private final String airportName;
     private final String airportCode;
 
+
     public Airport(String airportName, String airportCode) {
         this.airportName = airportName;
         this.airportCode = airportCode;
+    }
+
+    public String getAirportName() {
+        return airportName;
+    }
+
+    public String getAirportCode() {
+        return airportCode;
     }
 
     @Override
