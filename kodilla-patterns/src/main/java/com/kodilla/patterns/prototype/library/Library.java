@@ -4,12 +4,12 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public final class Library extends Prototype {
+public final class Library extends Prototype<Library> {
 
     private String name;
     private Set<Book> books = new HashSet<>();
 
-    public Library(final String name) {
+    public Library(String name) {
         this.name = name;
     }
 
@@ -21,25 +21,24 @@ public final class Library extends Prototype {
         return books;
     }
 
-    public Library shallowClone() throws CloneNotSupportedException {
-        return (Library) super.clone();
+    public void setName(String name) {
+        this.name = name;
     }
-/*
-    public Library deepClone() throws CloneNotSupportedException {
-        Library clonedLibrary = super.clone();
-        clonedLibrary.books = new HashSet<>();
-        /*  Board clonedBoard = super.clone();
-        clonedBoard.lists = new HashSet<>();
-        for (TasksList theList : lists) {
-        TasksList clonedList = new TasksList(theList.getName());
-        for (Task task : theList.getTasks()) {
-            clonedList.getTasks().add(task);
-        }
-        clonedBoard.getLists().add(clonedList);
-    }
-        return clonedLibrary;
-    }*/
 
+    public Library shallowCopy() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+
+    public Library deepCopy() throws CloneNotSupportedException {
+        Library deepClonedLibrary = super.clone();
+        deepClonedLibrary.books = new HashSet<>();
+        for (Book book : books) {
+            Book clonedBooks = new Book(book.getAuthor(), book.getTitle(), book.getPublicationDate());
+            deepClonedLibrary.getBooks().add(clonedBooks);
+        }
+        return deepClonedLibrary;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -52,12 +51,13 @@ public final class Library extends Prototype {
         return books.equals(library.books);
     }
 
+
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + books.hashCode();
-        return result;
+        return Objects.hash(name, books);
     }
+
+
 
     /* 5. Zmodyfikuj klasę Library tak, aby była zgodna ze wzorcem "Prototype".*/
 }
